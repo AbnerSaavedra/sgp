@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Patient;
+use App\Models\Doctor;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class PatientController extends Controller
+class DoctorController extends Controller
 {
-    public function index(): Renderable
+   public function index(): Renderable
     {
-        $patients = Patient::paginate();
-        return view('patients.index', compact('patients'));
+        $doctors = Doctor::paginate();
+        return view('doctors.index', compact('doctors'));
     }
 
     public function create(): Renderable
     {
-        $patient = new Patient;
-        $title = __('Patient store');
-        $action = route('patients.store');
-        $buttonText = __('Patient store');
-        return view('patients.form', compact('patient', 'title', 'action', 'buttonText'));
+        $doctor = new Doctor;
+        $title = __('Doctor store');
+        $action = route('doctors.store');
+        $buttonText = __('Doctor store');
+        return view('doctors.form', compact('doctor', 'title', 'action', 'buttonText'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
+            'idCard' => 'required|string|max:100',
             'name' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
             'email' => 'required|email|max:100',
@@ -35,7 +36,8 @@ class PatientController extends Controller
             'birthday' => 'required|date',
 
         ]);
-        Patient::create([
+        Doctor::create([
+            'idCard' => $request->string('idCard'),
             'name' => $request->string('name'),
             'lastname' => $request->string('lastname'),
             'email' => $request->string('email'),
@@ -45,28 +47,28 @@ class PatientController extends Controller
 
         ]);
         
-        return redirect()->route('patients.index');
+        return redirect()->route('doctors.index');
     }
 
-    public function show(Patient $patient): Renderable
+    public function show(Doctor $doctor): Renderable
     {
-        // $patient->load('user:id,name');
-        return view('patients.show', compact('patient'));
+        // $doctor->load('user:id,name');
+        return view('doctors.show', compact('doctor'));
     }
 
-    public function edit(Patient $patient): Renderable
+    public function edit(Doctor $doctor): Renderable
     {
-        $title = __('Patient edit');
-        $action = route('patients.update', $patient);
-        $buttonText = __('Patient update');
+        $title = __('Doctor edit');
+        $action = route('doctors.update', $doctor);
+        $buttonText = __('Doctor update');
         $method = 'PUT';
-        return view('patients.form', compact('patient', 'title', 'action', 'buttonText', 'method'));
+        return view('doctors.form', compact('doctor', 'title', 'action', 'buttonText', 'method'));
     }
 
-    public function update(Request $request, Patient $patient): RedirectResponse
+    public function update(Request $request, Doctor $doctor): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|unique:patients,name,' . $patient->id . '|string|max:100',
+            'name' => 'required|unique:doctors,name,' . $doctor->id . '|string|max:100',
             'lastname' => 'required|string|max:100',
             'email' => 'required|email|max:100',
             'phone' => 'required|string|max:100',
@@ -74,7 +76,7 @@ class PatientController extends Controller
             'birthday' => 'required|date',
 
         ]);
-        $patient->update([
+        $doctor->update([
             'name' => $request->string('name'),
             'lastname' => $request->string('lastname'),
             'address' => $request->string('address'),
@@ -84,12 +86,12 @@ class PatientController extends Controller
 
         ]);
         
-        return redirect()->route('patients.index');
+        return redirect()->route('doctors.index');
     }
 
-    public function destroy(Patient $patient): RedirectResponse
+    public function destroy(Doctor $doctor): RedirectResponse
     {
-        $patient->delete();
-        return redirect()->route('patients.index');
+        $doctor->delete();
+        return redirect()->route('doctors.index');
     }
 }
