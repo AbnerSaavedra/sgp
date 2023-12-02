@@ -14,7 +14,7 @@
                         <a href="{{ route('patients.create') }}" class="bg-indigo-500 hover:bg-indigo-700 text-gray-800 font-bold py-2 px-4 rounded">Patient store</a>
                     </div>
                     <div class="mt-4">
-                        <table class="table-auto w-full display compact" id="patients-table">
+                        <table class="table-auto w-full">
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 <tr>
                                     <th class="px-4 py-2">{{ __('Name') }}</th>
@@ -30,7 +30,6 @@
                                         <td class="border px-4 py-2" style="width: 260px">
                                             <a href="{{ route('patients.show', $patient) }}" class="bg-blue-500 hover:bg-blue-700 text-gray-800 font-bold py-2 px-4 rounded">{{ __('Ver') }}</a>
                                             <a href="{{ route('patients.edit', $patient) }}" class="bg-blue-500 hover:bg-blue-700 text-gray-800 font-bold py-2 px-4 rounded">{{ __('Editar') }}</a>
-                                            <a href="{{ route('medicalHistory.createMedicalHistory', $patient) }}" class="bg-blue-500 hover:bg-blue-700 text-gray-800 font-bold py-2 px-4 rounded">{{ __('Medical history') }}</a>
                                             <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -54,50 +53,9 @@
                                 </tfoot>
                             @endif
                         </table>
-                        @section('scripts')
-                        <script>
-                            $(document).ready(function() {
-                                $('#patients-table').DataTable();
-                            });
-                        </script>
-                        @endsection
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-
-@extends('layouts.table')
-
-<!-- @section('content')
-    <table id="user-table" class="display">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Fecha de Creación</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($patients as $patient)
-                <tr>
-                    <td>{{ $patient->id }}</td>
-                    <td>{{ $patient->name }}</td>
-                    <td>{{ $patient->email }}</td>
-                    <td>{{ $patient->created_at }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@endsection
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#user-table').DataTable();
-        });
-    </script>
-@endsection -->

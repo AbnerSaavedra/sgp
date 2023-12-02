@@ -21,12 +21,14 @@ class PatientController extends Controller
         $title = __('Patient store');
         $action = route('patients.store');
         $buttonText = __('Patient store');
-        return view('patients.form', compact('patient', 'title', 'action', 'buttonText'));
+        $method = 'POST';
+        return view('patients.form', compact('patient', 'title', 'action', 'buttonText', 'method'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
+            'idCard' => 'required|string|max:100',
             'name' => 'required|string|max:100',
             'lastname' => 'required|string|max:100',
             'email' => 'required|email|max:100',
@@ -36,6 +38,7 @@ class PatientController extends Controller
 
         ]);
         Patient::create([
+            'idCard' => $request->string('idCard'),
             'name' => $request->string('name'),
             'lastname' => $request->string('lastname'),
             'email' => $request->string('email'),

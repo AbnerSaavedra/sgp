@@ -1,3 +1,5 @@
+@extends('layouts.table')
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -14,7 +16,7 @@
                         <a href="{{ route('doctors.create') }}" class="bg-indigo-500 hover:bg-indigo-700 text-gray-800 font-bold py-2 px-4 rounded">Doctor store</a>
                     </div>
                     <div class="mt-4">
-                        <table class="table-auto w-full">
+                        <table class="table-auto w-full display" id="doctors-table">
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 <tr>
                                     <th class="px-4 py-2">{{ __('Name') }}</th>
@@ -55,6 +57,13 @@
                                 </tfoot>
                             @endif
                         </table>
+                        @section('scripts')
+                        <script>
+                            $(document).ready(function() {
+                                $('#doctors-table').DataTable();
+                            });
+                        </script>
+                        @endsection
                     </div>
                 </div>
             </div>

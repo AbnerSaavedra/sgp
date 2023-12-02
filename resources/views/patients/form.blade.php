@@ -14,6 +14,15 @@
                         @isset ($method)
                             @method($method)
                         @endif
+                        @if ($method === 'POST')
+                        <div class="mb-4">
+                            <label for="idCard" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Id card') }}</label>
+                            <input type="text" name="idCard" id="idCard" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('idCard', $patient->idCard) }}">
+                            @error('idCard')
+                                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        @endif
                         <div class="mb-4">
                             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">{{ __('Name') }}</label>
                             <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="{{ old('name', $patient->name) }}">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\MedicalHistoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/patients', PatientController::class);
     Route::resource('/doctors', DoctorController::class);
+    Route::resource('/medicalHistory', MedicalHistoryController::class);
+    Route::get('/medicalHistory/{patient}/createMedicalHistory', [MedicalHistoryController::class, 'CreateMedicalHistory'])->name('medicalHistory.createMedicalHistory');
 });
 
 /* Route::middleware('auth')->group(function () {

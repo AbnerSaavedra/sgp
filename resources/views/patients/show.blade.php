@@ -2,7 +2,7 @@
     <!-- detalle del proyecto con título, descripción y autor -->
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Detalle del proyecto') }}
+            {{ __('Detalle paciente') }}
         </h2>
     </x-slot>
 
@@ -23,6 +23,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="{{ route('patients.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">{{ __('Volver') }}</a>
                     <a href="{{ route('patients.edit', $patient) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">{{ __('Editar') }}</a>
+
+                    <a href="{{ route('medicalHistory.createMedicalHistory', $patient) }}" class="bg-blue-500 hover:bg-blue-700 text-gray-800 font-bold py-2 px-4 rounded">{{ __('Medical history') }}</a>
                     <form action="{{ route('patients.destroy', $patient) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')

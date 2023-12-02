@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css" rel="stylesheet">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -32,5 +33,9 @@
                 {{ $slot }}
             </main>
         </div>
+        @yield('content')
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+        @yield('scripts')
     </body>
 </html>
