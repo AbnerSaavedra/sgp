@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MedicalHistoryController;
+use App\Http\Controllers\ConsultationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('/doctors', DoctorController::class);
     Route::resource('/medicalHistory', MedicalHistoryController::class);
     Route::get('/medicalHistory/{patient}/createMedicalHistory', [MedicalHistoryController::class, 'CreateMedicalHistory'])->name('medicalHistory.createMedicalHistory');
+    Route::get('/consultations/{medicalHistory}/getConsultations', [ConsultationController::class, 'getConsultations'])->name('consultations.getConsultations');
+    Route::resource('/consultations', ConsultationController::class);
+    Route::get('/consultations/{medicalHistory}/createConsultation', [ConsultationController::class, 'CreateConsultation'])->name('consultations.createConsultation');
 });
 
 /* Route::middleware('auth')->group(function () {
